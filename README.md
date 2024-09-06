@@ -1,6 +1,3 @@
-Aqui está o arquivo `README.md` adaptado ao seu projeto com base nas informações do arquivo `package.json`:
-
-```markdown
 # backend-base
 
 Este repositório contém a base de um projeto Backend, projetado para funcionar em conjunto com um Frontend desenvolvido em React JS + TypeScript. O backend utiliza **Fastify** como framework web, **Prisma** como ORM e **TypeScript** como linguagem principal.
@@ -95,4 +92,3 @@ Este projeto está licenciado sob a licença **ISC**. Consulte o arquivo [LICENS
 - **Scripts**: Instruções sobre como rodar o projeto em modo de desenvolvimento e como gerenciar o banco de dados com o Prisma.
 - **Licença**: O projeto está licenciado sob a licença ISC, conforme o `package.json`.
 
-Você pode adicionar ou ajustar qualquer informação específica que ache relevante para o seu projeto!
