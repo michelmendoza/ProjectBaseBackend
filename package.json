@@ -1,0 +1,22 @@
+{
+  "name": "backend-base",
+  "version": "1.0.0", 
+  "main": "index.js",
+  "description": "Base de Projeto Backend ao Frontend com React JS + TypeScript",
+  "author": "Michel Mendoza",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+   "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.5.3",
+    "prisma": "^5.19.1",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@prisma/client": "^5.19.1",
+    "fastify": "^4.28.1",
+    "tsx": "^4.19.0"
+  }
+}
