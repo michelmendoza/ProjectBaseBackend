@@ -5,7 +5,8 @@
   "description": "Base de Projeto Backend ao Frontend com React JS + TypeScript",
   "author": "Michel Mendoza",
   "scripts": {
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts",
+    "start": "tsx watch src/server.ts"
   },
    "license": "ISC",
   "devDependencies": {
