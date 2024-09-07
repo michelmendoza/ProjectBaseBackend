@@ -17,7 +17,8 @@ const cors_1 = __importDefault(require("@fastify/cors"));
 const routes_1 = require("./routes");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const porta = process.env.PORT || 3000;
+const porta = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+console.log(`Servidor rodando na porta: ${porta}`);
 const app = (0, fastify_1.default)({ logger: true });
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     app.setErrorHandler((error, request, reply) => {
@@ -26,7 +27,7 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     yield app.register(routes_1.routes);
     yield app.register(cors_1.default);
     try {
-        yield app.listen({ port: 3000 });
+        yield app.listen({ port: porta });
     }
     catch (err) {
         process.exit(1);

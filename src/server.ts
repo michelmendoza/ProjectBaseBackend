@@ -6,8 +6,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-const porta = process.env.PORT || 3000;
+const porta = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
+console.log(`Servidor rodando na porta: ${porta}`);
 
 const app = Fastify({ logger:true})
 
@@ -21,7 +22,7 @@ const start = async () => {
     await app.register(cors)
 
         try {
-            await app.listen({port:3000})
+            await app.listen({port:porta})
         }
     catch (err) {
         process.exit(1);
