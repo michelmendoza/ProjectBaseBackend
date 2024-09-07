@@ -6,7 +6,7 @@
   "author": "Michel Mendoza",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
+    "build": "tsc && prisma generate",
     "start": "node dist/server.js"
   },
   "license": "ISC",
