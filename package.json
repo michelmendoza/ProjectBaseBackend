@@ -6,11 +6,12 @@
   "author": "Michel Mendoza",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "start": "tsx watch src/server.ts"
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^22.5.3",
+    "@types/node": "^22.5.4",
     "prisma": "^5.19.1",
     "typescript": "^5.5.4"
   },
