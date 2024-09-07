@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-const porta = process.env.PORT;
+const porta = process.env.PORT || 3000;
 
 
 const app = Fastify({ logger:true})
