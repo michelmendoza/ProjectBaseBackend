@@ -1,25 +1,35 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCustomerController = void 0;
 const CreateCustomerService_1 = require("../services/CreateCustomerService");
 class CreateCustomerController {
-    handle(request, reply) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { name, email, phone } = request.body;
-            console.log(request.body);
-            const customerService = new CreateCustomerService_1.CreateCustomerService();
-            const customer = yield customerService.execute({ name, email, phone });
-            reply.send(customer);
+    async handle(request, reply) {
+        const customerService = new CreateCustomerService_1.CreateCustomerService();
+        // Parte para lidar com o upload de imagem e dados multipart
+        const parts = request.parts();
+        let customerData = {}; // Para armazenar os dados de cliente (name, email, phone)
+        let imageFile = null; // Para armazenar o arquivo de imagem
+        // Processa cada parte do formulário multipart
+        for await (const part of parts) {
+            if (part.file) {
+                // Se for um arquivo, captura o arquivo de imagem
+                imageFile = part;
+            }
+            else {
+                // Se for um campo, armazena os dados do cliente
+                customerData[part.fieldname] = part.value;
+            }
+        }
+        // Agora chamamos o service com os dados do cliente e o arquivo de imagem
+        // Chama o service com os dados do cliente e o arquivo de imagem
+        const customer = await customerService.execute({
+            name: customerData.name,
+            email: customerData.email,
+            phone: customerData.phone,
+            status: customerData.status,
+            file: imageFile, // Passando o arquivo de imagem para a service
         });
+        reply.send(customer);
     }
 }
 exports.CreateCustomerController = CreateCustomerController;

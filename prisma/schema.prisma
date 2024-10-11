@@ -11,15 +11,15 @@ generator client {
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
- 
 }
 
-model Customer{
-  id String @id @default(auto()) @map("_id") @db.ObjectId 
-  name String
-  email String
-  phone String?
-  status Boolean
+model Customer {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  email      String
+  phone      String?
+  status     Boolean
+  image      String? // Caminho da imagem do cliente
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
 
