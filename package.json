@@ -21,6 +21,7 @@
   "dependencies": {
     "@fastify/cors": "^9.0.1",
     "@prisma/client": "^5.19.1",
+    "cloudinary": "^2.5.1",
     "dotenv": "^16.4.5",
     "fastify": "^4.28.1",
     "fastify-multipart": "^5.4.0",

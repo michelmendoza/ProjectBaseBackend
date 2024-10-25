@@ -4,6 +4,7 @@ import { CreateCustomerService } from "../services/CreateCustomerService";
 class CreateCustomerController {
     async handle(request: any, reply: FastifyReply) {
         const customerService = new CreateCustomerService();
+        console.log("Received request:", request.body);
 
         // Parte para lidar com o upload de imagem e dados multipart
         const parts = request.parts();
@@ -21,17 +22,33 @@ class CreateCustomerController {
             }
         }
 
-        // Agora chamamos o service com os dados do cliente e o arquivo de imagem
-      // Chama o service com os dados do cliente e o arquivo de imagem
-      const customer = await customerService.execute({
-        name: customerData.name,
-        email: customerData.email,
-        phone: customerData.phone,
-        status: customerData.status,
-        file: imageFile, // Passando o arquivo de imagem para a service
-    });
+        console.log("customerData:", customerData);
+        console.log("imageFile:", imageFile);
 
-        reply.send(customer);
+        // Chama o service com os dados do cliente e o arquivo de imagem
+        try {
+            const customer = await customerService.execute({
+                name: customerData.name,
+                email: customerData.email,
+                phone: customerData.phone,
+                status: customerData.status || true, // Adiciona um valor padrão se o status não estiver presente
+                file: imageFile, // Passando o arquivo de imagem para a service
+            });
+
+            console.log("Customer created:", customer);
+            // Responde com o cliente criado
+            reply.send({ message: 'Customer created successfully', customer });
+        } catch (error: unknown) {
+            console.error('Error during customer creation:', error);
+
+            // Verifica se o erro é uma instância de Error
+            if (error instanceof Error) {
+                reply.status(500).send({ message: 'Customer creation failed', error: error.message });
+            } else {
+                // Caso o erro não seja um objeto Error, envie uma mensagem genérica
+                reply.status(500).send({ message: 'Customer creation failed', error: 'Unknown error' });
+            }
+        }
     }
 }
 
