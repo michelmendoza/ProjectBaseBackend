@@ -37,7 +37,7 @@ export async function routes(fastify: FastifyInstance, option: FastifyPluginOpti
           // Faz o upload da imagem para o Cloudinary
           const uploadResult = await cloudinary.uploader.upload_stream({
             folder: 'customers' // Opcionalmente, uma pasta no Cloudinary para organizar os uploads
-          }, async (error, result) => {
+          }, async (error: unknown, result: any) => {
             if (error) {
               throw new Error('Erro no upload da imagem');
             }

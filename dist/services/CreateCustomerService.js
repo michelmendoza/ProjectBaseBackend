@@ -1,44 +1,34 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCustomerService = void 0;
-const prisma_1 = __importDefault(require("../prisma"));
-const path_1 = require("path");
-const fs_1 = require("fs");
-const stream_1 = require("stream");
-const util_1 = require("util");
 const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient();
-const pump = (0, util_1.promisify)(stream_1.pipeline);
-const uploadDir = (0, path_1.join)(__dirname, '../uploads');
-if (!(0, fs_1.existsSync)(uploadDir)) {
-    (0, fs_1.mkdirSync)(uploadDir, { recursive: true });
-}
 class CreateCustomerService {
-    async execute({ name, email, phone, status, file }) {
-        let imagePath = null;
-        // Se houver uma imagem, processa e salva no diretório
-        if (file) {
-            const filePath = (0, path_1.join)(uploadDir, file.filename);
-            const writeStream = (0, fs_1.createWriteStream)(filePath);
-            await pump(file.file, writeStream);
-            imagePath = `/uploads/${file.filename}`;
-        }
+    constructor() {
+        this.prisma = new client_1.PrismaClient();
+    }
+    async execute(data) {
+        // Validação dos dados recebidos
+        const { name, email, phone, status, file } = data;
         if (!name || !email || !phone) {
-            throw new Error("Preencher todos os campos");
+            throw new Error('Preencher todos os campos: nome, email, telefone');
         }
-        const customer = await prisma_1.default.customer.create({
-            data: {
-                name,
-                email,
-                phone,
-                status,
-                image: imagePath, // Adiciona o caminho da imagem ao cliente
-            }
-        });
-        return customer;
+        try {
+            // Criação do cliente no banco de dados
+            const customer = await this.prisma.customer.create({
+                data: {
+                    name,
+                    email,
+                    phone,
+                    status,
+                    image: file ? file.filename : null // Se não houver arquivo, mantém null
+                },
+            });
+            return customer; // Retorna o cliente criado
+        }
+        catch (error) {
+            console.error('Error while creating customer:', error);
+            throw new Error('Erro ao criar cliente');
+        }
     }
 }
 exports.CreateCustomerService = CreateCustomerService;

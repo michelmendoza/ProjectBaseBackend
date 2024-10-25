@@ -8,7 +8,6 @@ const cors_1 = __importDefault(require("@fastify/cors"));
 const routes_1 = require("./routes");
 const dotenv_1 = __importDefault(require("dotenv"));
 const fastify_multipart_1 = __importDefault(require("fastify-multipart"));
-const uploadRoute_1 = require("./uploadRoute");
 dotenv_1.default.config();
 const porta = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 console.log(`Servidor rodando na porta: ${porta}`);
@@ -22,7 +21,7 @@ const start = async () => {
         reply.code(400).send({ message: error.message });
     });
     // Registrar as rotas 
-    await app.register(uploadRoute_1.uploadRoute);
+    // await app.register(uploadRoute);
     await app.register(routes_1.routes);
     await app.register(cors_1.default);
     try {

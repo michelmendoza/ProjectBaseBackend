@@ -1,0 +1,13 @@
+{
+    "level": 50,
+    "time": 1729855040803,
+    "pid": 14048,
+    "hostname": "DESKTOP-D8BLQIS",
+    "reqId": "req-3",
+    "err": {
+        "type": "Error",
+        "message": "Preencher todos os campos",
+        "stack": "Error: Preencher todos os campos\n    at CreateCustomerService.execute (D:\\DEV\\Backend\\Dahsboard_api1\\ProjectBaseBackend\\dist\\services\\CreateCustomerService.js:30:19)\n    at CreateCustomerController.handle (D:\\DEV\\Backend\\Dahsboard_api1\\ProjectBaseBackend\\dist\\controllers\\CreateCustomerController.js:25:48)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    "msg": "Promise errored, but reply.sent = true was set"
+}
