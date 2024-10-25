@@ -3,7 +3,7 @@ import { join } from 'path';
 import { createWriteStream, existsSync, mkdirSync, createReadStream } from 'fs';
 import { pipeline } from 'stream';
 import { promisify } from 'util';
-import cloudinary from '../cloudinary'
+ import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs'; // para ler arquivos
 
 const pump = promisify(pipeline);
