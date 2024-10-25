@@ -27,7 +27,7 @@ const start = async () => {
     }) 
 
     // Registrar as rotas 
-    await app.register(uploadRoute);
+    // await app.register(uploadRoute);
     await app.register(routes)
     await app.register(cors)
 
